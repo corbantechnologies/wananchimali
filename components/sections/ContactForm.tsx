@@ -1,42 +1,45 @@
 "use client"
 
 import * as React from "react"
-import { useFormStatus } from "react-dom"
-import { submitDemoRequest } from "@/app/actions"
 import { Button } from "@/components/ui/button"
 import { Section } from "@/components/ui/section"
 import { Loader2, CheckCircle2 } from "lucide-react"
 
-function SubmitButton() {
-    const { pending } = useFormStatus()
-    return (
-        <Button
-            type="submit"
-            size="lg"
-            className="w-full bg-corporate-emerald hover:bg-corporate-emerald/90 text-white font-bold h-12"
-            disabled={pending}
-        >
-            {pending ? (
-                <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Sending Request...
-                </>
-            ) : (
-                "Request Demo / Onboarding"
-            )}
-        </Button>
-    )
-}
-
 export function ContactForm() {
-    const [state, setState] = React.useState<{ success: boolean; message: string } | null>(null)
+    const [status, setStatus] = React.useState<"idle" | "submitting" | "success" | "error">("idle")
+    const [message, setMessage] = React.useState("")
 
-    async function clientAction(formData: FormData) {
-        const result = await submitDemoRequest(formData)
-        setState({ success: result.success, message: result.message })
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        setStatus("submitting")
+
+        const formData = new FormData(event.currentTarget)
+        const data = Object.fromEntries(formData.entries())
+
+        try {
+            const response = await fetch("/api/send", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+
+            const result = await response.json()
+
+            if (response.ok && result.success) {
+                setStatus("success")
+            } else {
+                setStatus("error")
+                setMessage(result.error || "Something went wrong. Please try again.")
+            }
+        } catch (error) {
+            setStatus("error")
+            setMessage("Failed to connect to the server.")
+        }
     }
 
-    if (state?.success) {
+    if (status === "success") {
         return (
             <Section id="contact" className="bg-gray-50">
                 <div className="max-w-xl mx-auto text-center p-12 bg-white rounded-2xl shadow-xl border border-corporate-emerald/20">
@@ -50,7 +53,7 @@ export function ContactForm() {
                     <Button
                         variant="outline"
                         className="mt-8"
-                        onClick={() => setState(null)}
+                        onClick={() => setStatus("idle")}
                     >
                         Submit Another Request
                     </Button>
@@ -69,7 +72,7 @@ export function ContactForm() {
                     </p>
                 </div>
 
-                <form action={clientAction} className="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100">
+                <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100">
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div className="space-y-2">
                             <label htmlFor="name" className="text-sm font-medium text-gray-700">Full Name</label>
@@ -117,7 +120,27 @@ export function ContactForm() {
                         </select>
                     </div>
 
-                    <SubmitButton />
+                    {status === "error" && (
+                        <div className="mb-6 p-4 text-red-600 bg-red-50 rounded-lg text-sm">
+                            {message}
+                        </div>
+                    )}
+
+                    <Button
+                        type="submit"
+                        size="lg"
+                        className="w-full bg-corporate-emerald hover:bg-corporate-emerald/90 text-white font-bold h-12"
+                        disabled={status === "submitting"}
+                    >
+                        {status === "submitting" ? (
+                            <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Sending Request...
+                            </>
+                        ) : (
+                            "Request Demo / Onboarding"
+                        )}
+                    </Button>
                 </form>
             </div>
         </Section>
