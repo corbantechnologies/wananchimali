@@ -75,14 +75,14 @@ export function ContactForm() {
                             <label htmlFor="name" className="text-sm font-medium text-gray-700">Full Name</label>
                             <input
                                 type="text" name="name" id="name" required placeholder="John Doe"
-                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50"
+                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 text-corporate-navy bg-white"
                             />
                         </div>
                         <div className="space-y-2">
                             <label htmlFor="phone" className="text-sm font-medium text-gray-700">Phone Number</label>
                             <input
                                 type="tel" name="phone" id="phone" required placeholder="+254 7..."
-                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50"
+                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 text-corporate-navy bg-white"
                             />
                         </div>
                     </div>
@@ -92,14 +92,14 @@ export function ContactForm() {
                             <label htmlFor="email" className="text-sm font-medium text-gray-700">Email Address</label>
                             <input
                                 type="email" name="email" id="email" required placeholder="john@company.com"
-                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50"
+                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 text-corporate-navy bg-white"
                             />
                         </div>
                         <div className="space-y-2">
                             <label htmlFor="organization" className="text-sm font-medium text-gray-700">Organization / SACCO Name</label>
                             <input
                                 type="text" name="organization" id="organization" placeholder="e.g. Wananchi SACCO"
-                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50"
+                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 text-corporate-navy bg-white"
                             />
                         </div>
                     </div>
@@ -108,7 +108,7 @@ export function ContactForm() {
                         <label htmlFor="interest" className="text-sm font-medium text-gray-700">Primary Interest</label>
                         <select
                             name="interest" id="interest"
-                            className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 bg-white"
+                            className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 bg-white text-corporate-navy"
                         >
                             <option value="General Inquiry">General Inquiry</option>
                             <option value="Corporate System (Diminishing)">Corporate System (Diminishing Balance)</option>
