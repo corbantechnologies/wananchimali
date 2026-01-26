@@ -23,7 +23,7 @@ export async function submitDemoRequest(formData: FormData) {
 
   try {
     const data = await resend.emails.send({
-      from: "Wananchi Mali <onboarding@resend.dev>", // Update this with your verified domain
+      from: "Wananchi Mali <onboarding@wananchimali.com>", // Update this with your verified domain
       to: ["corbantechnologies@gmail.com", 'info@corbantechnologies.org'], // Send to yourself or admin email
       subject: `New Demo Request: ${organization}`,
       html: `
