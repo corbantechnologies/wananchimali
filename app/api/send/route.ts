@@ -6,7 +6,8 @@ import SaccoInquiryReceivedTemplate from "@/components/templates/sacco-inquiry-r
 export async function POST(req: Request) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL || "";
-  const FROM_EMAIL = process.env.FROM_EMAIL || ""; // Fallback for dev
+  const FROM_EMAIL = process.env.FROM_EMAIL || "";
+  const ALTERNATE_EMAIL = process.env.ALTERNATE_EMAIL || "";
 
   try {
     const body = await req.json();
@@ -26,7 +27,7 @@ export async function POST(req: Request) {
     // 1. Send notification to Business Team
     const { error: businessError } = await resend.emails.send({
       from: `Wananchi Mali Notifications <${FROM_EMAIL}>`,
-      to: [BUSINESS_EMAIL],
+      to: [BUSINESS_EMAIL, ALTERNATE_EMAIL],
       subject: `New Demo Request: ${organization} - ${name}`,
       react: SaccoInquiryNotificationTemplate({
         name,
