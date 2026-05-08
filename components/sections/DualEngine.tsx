@@ -45,7 +45,7 @@ export function DualEngine() {
                         </li>
                     </ul>
 
-                    <Link href="https://sproutsacco.vercel.app/" target="_blank" className="w-full">
+                    <Link href="https://one.wananchimali.com" target="_blank" className="w-full">
                         <Button className="w-full bg-corporate-navy hover:bg-corporate-navy/90 text-white h-12 text-base">
                             Launch Corporate Demo
                         </Button>
@@ -80,7 +80,7 @@ export function DualEngine() {
                         </li>
                     </ul>
 
-                    <Link href="https://mwandamzedusacco.vercel.app/" target="_blank" className="w-full">
+                    <Link href="https://one.wananchimali.com" target="_blank" className="w-full">
                         <Button variant="gold" className="w-full h-12 text-base">
                             Launch Chama Demo
                         </Button>
