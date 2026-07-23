@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/sections/Navbar"
 import { Hero } from "@/components/sections/Hero"
-import { DualEngine } from "@/components/sections/DualEngine"
-import { Ventures } from "@/components/sections/Ventures"
+import { HowItWorks } from "@/components/sections/HowItWorks"
 import { FeaturesGrid } from "@/components/sections/FeaturesGrid"
 import { ContactForm } from "@/components/sections/ContactForm"
 import { Footer } from "@/components/sections/Footer"
@@ -11,8 +10,7 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       <Navbar />
       <Hero />
-      <DualEngine />
-      <Ventures />
+      <HowItWorks />
       <FeaturesGrid />
       <ContactForm />
       <Footer />

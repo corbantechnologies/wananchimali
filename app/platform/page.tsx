@@ -508,7 +508,7 @@ export default function PlatformPage() {
                         href="/#contact"
                         className="inline-flex items-center gap-2 px-7 py-2.5 bg-corporate-navy text-white text-sm font-semibold rounded hover:bg-corporate-blue transition-colors"
                     >
-                        Contact Us <ArrowRight className="h-4 w-4" />
+                        Send an Inquiry <ArrowRight className="h-4 w-4" />
                     </Link>
                 </div>
             </section>

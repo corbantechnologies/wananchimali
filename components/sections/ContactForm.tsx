@@ -1,9 +1,15 @@
 "use client"
 
 import * as React from "react"
-import { Button } from "@/components/ui/button"
 import { Section } from "@/components/ui/section"
-import { Loader2, CheckCircle2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Loader2, CheckCircle2, Phone, Mail, MapPin } from "lucide-react"
+
+const contactInfo = [
+    { icon: Phone, label: "Call Us", value: "+254 700 000 000" },
+    { icon: Mail, label: "Email", value: "hello@wananchimali.com" },
+    { icon: MapPin, label: "Based in", value: "Mombasa, Kenya" },
+]
 
 export function ContactForm() {
     const [status, setStatus] = React.useState<"idle" | "submitting" | "success" | "error">("idle")
@@ -19,129 +25,151 @@ export function ContactForm() {
         try {
             const response = await fetch("/api/send", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             })
-
             const result = await response.json()
-
             if (response.ok && result.success) {
                 setStatus("success")
             } else {
                 setStatus("error")
                 setMessage(result.error || "Something went wrong. Please try again.")
             }
-        } catch (error) {
+        } catch {
             setStatus("error")
-            setMessage("Failed to connect to the server.")
+            setMessage("Failed to connect to the server. Please try again.")
         }
     }
 
-    if (status === "success") {
-        return (
-            <Section id="contact" className="bg-gray-50">
-                <div className="max-w-xl mx-auto text-center p-12 bg-white rounded-2xl shadow-xl border border-corporate-emerald/20">
-                    <div className="h-16 w-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
-                        <CheckCircle2 className="h-8 w-8" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-corporate-navy mb-2">Request Received!</h3>
-                    <p className="text-gray-600">
-                        Thank you for your interest. Our team will contact you shortly to schedule your demo.
-                    </p>
-                    <Button
-                        variant="outline"
-                        className="mt-8"
-                        onClick={() => setStatus("idle")}
-                    >
-                        Submit Another Request
-                    </Button>
-                </div>
-            </Section>
-        )
-    }
-
     return (
-        <Section id="contact" className="bg-gray-50">
-            <div className="max-w-3xl mx-auto">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-corporate-navy mb-4">Ready to Modernize?</h2>
-                    <p className="text-gray-600">
-                        Book a personalized demo or start your onboarding process today.
+        <Section id="contact" className="bg-corporate-navy text-white">
+            <div className="grid lg:grid-cols-5 gap-14 items-start">
+
+                {/* Left — context */}
+                <div className="lg:col-span-2">
+                    <div className="text-xs font-semibold text-corporate-gold uppercase tracking-widest mb-4">
+                        Get in Touch
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-4 leading-snug">
+                        Ready to Modernise Your SACCO?
+                    </h2>
+                    <p className="text-gray-300 text-sm leading-relaxed mb-10">
+                        Send us your details and we will reach out to discuss your SACCO's needs, walk you through the platform, and plan a setup that works for your team.
                     </p>
+
+                    <div className="space-y-5">
+                        {contactInfo.map((c) => (
+                            <div key={c.label} className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center flex-shrink-0">
+                                    <c.icon className="h-4 w-4 text-corporate-emerald" />
+                                </div>
+                                <div>
+                                    <div className="text-[11px] text-gray-400 uppercase tracking-wider">{c.label}</div>
+                                    <div className="text-sm text-white font-medium">{c.value}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100">
-                    <div className="grid md:grid-cols-2 gap-6 mb-6">
-                        <div className="space-y-2">
-                            <label htmlFor="name" className="text-sm font-medium text-gray-700">Full Name</label>
-                            <input
-                                type="text" name="name" id="name" required placeholder="John Doe"
-                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 text-corporate-navy bg-white"
-                            />
+                {/* Right — form */}
+                <div className="lg:col-span-3">
+                    {status === "success" ? (
+                        <div className="bg-white/5 border border-white/10 rounded p-10 text-center">
+                            <div className="w-14 h-14 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-5">
+                                <CheckCircle2 className="h-7 w-7 text-corporate-emerald" />
+                            </div>
+                            <h3 className="text-lg font-bold text-white mb-2">Inquiry Received</h3>
+                            <p className="text-gray-400 text-sm">
+                                Thank you. Our team will be in touch within one business day.
+                            </p>
+                            <button
+                                onClick={() => setStatus("idle")}
+                                className="mt-6 text-xs text-gray-400 hover:text-white underline underline-offset-4 transition-colors"
+                            >
+                                Submit another inquiry
+                            </button>
                         </div>
-                        <div className="space-y-2">
-                            <label htmlFor="phone" className="text-sm font-medium text-gray-700">Phone Number</label>
-                            <input
-                                type="tel" name="phone" id="phone" required placeholder="+254 7..."
-                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 text-corporate-navy bg-white"
-                            />
-                        </div>
-                    </div>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="bg-white/5 border border-white/10 rounded p-6 md:p-8 space-y-5">
+                            <div className="grid md:grid-cols-2 gap-5">
+                                <div className="space-y-1.5">
+                                    <label htmlFor="name" className="text-xs font-medium text-gray-300 uppercase tracking-wider">Full Name</label>
+                                    <input
+                                        type="text" name="name" id="name" required placeholder="Jane Mwangi"
+                                        className="w-full h-10 px-3 rounded bg-white/10 border border-white/10 text-white placeholder:text-gray-500 text-sm focus:outline-none focus:border-corporate-emerald/60 transition-colors"
+                                    />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label htmlFor="phone" className="text-xs font-medium text-gray-300 uppercase tracking-wider">Phone Number</label>
+                                    <input
+                                        type="tel" name="phone" id="phone" required placeholder="+254 7..."
+                                        className="w-full h-10 px-3 rounded bg-white/10 border border-white/10 text-white placeholder:text-gray-500 text-sm focus:outline-none focus:border-corporate-emerald/60 transition-colors"
+                                    />
+                                </div>
+                            </div>
 
-                    <div className="grid md:grid-cols-2 gap-6 mb-6">
-                        <div className="space-y-2">
-                            <label htmlFor="email" className="text-sm font-medium text-gray-700">Email Address</label>
-                            <input
-                                type="email" name="email" id="email" required placeholder="john@company.com"
-                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 text-corporate-navy bg-white"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label htmlFor="organization" className="text-sm font-medium text-gray-700">Organization / SACCO Name</label>
-                            <input
-                                type="text" name="organization" id="organization" placeholder="e.g. Wananchi SACCO"
-                                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 text-corporate-navy bg-white"
-                            />
-                        </div>
-                    </div>
+                            <div className="grid md:grid-cols-2 gap-5">
+                                <div className="space-y-1.5">
+                                    <label htmlFor="email" className="text-xs font-medium text-gray-300 uppercase tracking-wider">Email Address</label>
+                                    <input
+                                        type="email" name="email" id="email" required placeholder="jane@sacco.co.ke"
+                                        className="w-full h-10 px-3 rounded bg-white/10 border border-white/10 text-white placeholder:text-gray-500 text-sm focus:outline-none focus:border-corporate-emerald/60 transition-colors"
+                                    />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label htmlFor="organization" className="text-xs font-medium text-gray-300 uppercase tracking-wider">SACCO / Organization</label>
+                                    <input
+                                        type="text" name="organization" id="organization" placeholder="e.g. Wananchi SACCO"
+                                        className="w-full h-10 px-3 rounded bg-white/10 border border-white/10 text-white placeholder:text-gray-500 text-sm focus:outline-none focus:border-corporate-emerald/60 transition-colors"
+                                    />
+                                </div>
+                            </div>
 
-                    <div className="space-y-2 mb-8">
-                        <label htmlFor="interest" className="text-sm font-medium text-gray-700">Primary Interest</label>
-                        <select
-                            name="interest" id="interest"
-                            className="w-full h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-corporate-emerald/50 bg-white text-corporate-navy"
-                        >
-                            <option value="General Inquiry">General Inquiry</option>
-                            <option value="Corporate System (Diminishing)">Corporate System (Diminishing Balance)</option>
-                            <option value="Chama System (Flat Rate)">Chama System (Flat Rate)</option>
-                            <option value="Ventures (Asset Finance)">Ventures (Asset Finance)</option>
-                        </select>
-                    </div>
+                            <div className="space-y-1.5">
+                                <label htmlFor="interest" className="text-xs font-medium text-gray-300 uppercase tracking-wider">What best describes your need?</label>
+                                <select
+                                    name="interest" id="interest"
+                                    className="w-full h-10 px-3 rounded bg-white/10 border border-white/10 text-white text-sm focus:outline-none focus:border-corporate-emerald/60 transition-colors"
+                                >
+                                    <option value="General Inquiry" className="bg-corporate-navy">General Inquiry</option>
+                                    <option value="New SACCO Setup" className="bg-corporate-navy">New SACCO Setup</option>
+                                    <option value="Migrating from Existing System" className="bg-corporate-navy">Migrating from an Existing System</option>
+                                    <option value="Feature or Pricing Information" className="bg-corporate-navy">Feature or Pricing Information</option>
+                                    <option value="Technical Support" className="bg-corporate-navy">Technical Support</option>
+                                </select>
+                            </div>
 
-                    {status === "error" && (
-                        <div className="mb-6 p-4 text-red-600 bg-red-50 rounded-lg text-sm">
-                            {message}
-                        </div>
+                            <div className="space-y-1.5">
+                                <label htmlFor="message" className="text-xs font-medium text-gray-300 uppercase tracking-wider">Additional Details (optional)</label>
+                                <textarea
+                                    name="message" id="message" rows={3}
+                                    placeholder="Tell us about your SACCO — number of members, current challenges, etc."
+                                    className="w-full px-3 py-2.5 rounded bg-white/10 border border-white/10 text-white placeholder:text-gray-500 text-sm focus:outline-none focus:border-corporate-emerald/60 transition-colors resize-none"
+                                />
+                            </div>
+
+                            {status === "error" && (
+                                <div className="p-3 text-red-400 bg-red-500/10 border border-red-500/20 rounded text-xs">
+                                    {message}
+                                </div>
+                            )}
+
+                            <Button
+                                type="submit"
+                                className="w-full bg-corporate-emerald hover:bg-emerald-700 text-white font-semibold h-11"
+                                disabled={status === "submitting"}
+                            >
+                                {status === "submitting" ? (
+                                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</>
+                                ) : (
+                                    "Send Inquiry"
+                                )}
+                            </Button>
+                        </form>
                     )}
+                </div>
 
-                    <Button
-                        type="submit"
-                        size="lg"
-                        className="w-full bg-corporate-emerald hover:bg-corporate-emerald/90 text-white font-bold h-12"
-                        disabled={status === "submitting"}
-                    >
-                        {status === "submitting" ? (
-                            <>
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                Sending Request...
-                            </>
-                        ) : (
-                            "Request Demo / Onboarding"
-                        )}
-                    </Button>
-                </form>
             </div>
         </Section>
     )
