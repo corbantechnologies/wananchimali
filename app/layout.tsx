@@ -1,16 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.wananchimali.com"),
@@ -30,7 +19,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/hero-dashboard.png", // We will use the hero image as the OG image
+        url: "/images/hero-dashboard.png",
         width: 1200,
         height: 630,
         alt: "Wananchi Mali Dashboard",
@@ -44,7 +33,7 @@ export const metadata: Metadata = {
     images: ["/images/hero-dashboard.png"],
   },
   icons: {
-    icon: "/logo.png", // Assuming we have or will have a logo.png, otherwise it falls back to favicon
+    icon: "/logo.png",
   },
 };
 
@@ -55,9 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         {children}
       </body>
     </html>

@@ -57,6 +57,12 @@ export function Navbar() {
                     })}>
                         Ventures
                     </Link>
+                    <Link href="/platform" className={cn("text-sm font-medium hover:text-corporate-emerald transition-colors", {
+                        "text-white/90": !isScrolled,
+                        "text-corporate-navy dark:text-gray-200": isScrolled
+                    })}>
+                        Platform
+                    </Link>
                     <Link href="#features" className={cn("text-sm font-medium hover:text-corporate-emerald transition-colors", {
                         "text-white/90": !isScrolled,
                         "text-corporate-navy dark:text-gray-200": isScrolled
@@ -107,6 +113,13 @@ export function Navbar() {
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             Ventures
+                        </Link>
+                        <Link
+                            href="/platform"
+                            className="text-base font-medium text-corporate-navy hover:text-corporate-emerald p-2 rounded-md hover:bg-gray-50"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Platform
                         </Link>
                         <Link
                             href="#features"
