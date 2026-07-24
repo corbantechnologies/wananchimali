@@ -77,7 +77,7 @@ export function Footer() {
                     <p>
                         &copy; {new Date().getFullYear()} Wananchi Mali. A division of{" "}
                         <a
-                            href="https://www.corbantech.co.ke"
+                            href="https://www.corbantechnologies.org"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-gray-400 hover:text-white transition-colors"
