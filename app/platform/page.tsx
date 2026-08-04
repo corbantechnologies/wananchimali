@@ -418,44 +418,47 @@ export default function PlatformPage() {
                         </div>
 
                         {/* Visual: Template mockup */}
-                        <div className="bg-corporate-navy rounded p-5 shadow-xl text-xs font-mono">
-                            <div className="flex items-center gap-2 mb-4">
-                                <div className="h-3 w-3 rounded-full bg-red-500" />
-                                <div className="h-3 w-3 rounded-full bg-yellow-400" />
-                                <div className="h-3 w-3 rounded-full bg-green-400" />
-                                <span className="text-gray-400 ml-2 text-[11px]">fee_payments_bulk_template.csv</span>
-                            </div>
-                            <div className="overflow-x-auto">
-                                <table className="w-full border-collapse">
-                                    <thead>
-                                        <tr>
-                                            {["Member Name", "Fee Type", "Acc. No.", "Balance", "Amount", "Pay Method", "Date"].map(h => (
-                                                <th key={h} className="text-left text-corporate-gold py-1 pr-4 whitespace-nowrap border-b border-white/10 font-medium">{h}</th>
-                                            ))}
-                                        </tr>
-                                    </thead>
-                                    <tbody className="text-gray-300">
-                                        {[
-                                            ["Jane Doe", "Annual Fee", "FA-001", "2,000", "", "", "2026-07-31"],
-                                            ["John Mwangi", "Annual Fee", "FA-002", "2,000", "", "", "2026-07-31"],
-                                            ["Alice Wanjiru", "Annual Fee", "FA-003", "1,500", "", "", "2026-07-31"],
-                                        ].map((row, i) => (
-                                            <tr key={i} className="border-b border-white/5">
-                                                {row.map((cell, j) => (
-                                                    <td key={j} className={`py-1.5 pr-4 whitespace-nowrap ${cell === "" ? "text-white/20" : ""}`}>
-                                                        {cell === "" ? "—" : cell}
-                                                    </td>
-                                                ))}
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className="mt-4 flex items-center gap-2 text-corporate-emerald text-[11px]">
-                                <CheckCircle className="h-3.5 w-3.5" />
-                                <span>Template filters only accounts with outstanding balances</span>
-                            </div>
-                        </div>
+{/* ADDED min-w-0 HERE 👇 */}
+    <div className="bg-corporate-navy rounded p-5 shadow-xl text-xs font-mono min-w-0">
+        <div className="flex items-center gap-2 mb-4">
+            <div className="h-3 w-3 rounded-full bg-red-500" />
+            <div className="h-3 w-3 rounded-full bg-yellow-400" />
+            <div className="h-3 w-3 rounded-full bg-green-400" />
+            <span className="text-gray-400 ml-2 text-[11px]">fee_payments_bulk_template.csv</span>
+        </div>
+        
+        {/* ADDED w-full HERE 👇 */}
+        <div className="overflow-x-auto w-full">
+            <table className="w-full border-collapse">
+                <thead>
+                    <tr>
+                        {["Member Name", "Fee Type", "Acc. No.", "Balance", "Amount", "Pay Method", "Date"].map(h => (
+                            <th key={h} className="text-left text-corporate-gold py-1 pr-4 whitespace-nowrap border-b border-white/10 font-medium">{h}</th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody className="text-gray-300">
+                    {[
+                        ["Jane Doe", "Annual Fee", "FA-001", "2,000", "", "", "2026-07-31"],
+                        ["John Mwangi", "Annual Fee", "FA-002", "2,000", "", "", "2026-07-31"],
+                        ["Alice Wanjiru", "Annual Fee", "FA-003", "1,500", "", "", "2026-07-31"],
+                    ].map((row, i) => (
+                        <tr key={i} className="border-b border-white/5">
+                            {row.map((cell, j) => (
+                                <td key={j} className={`py-1.5 pr-4 whitespace-nowrap ${cell === "" ? "text-white/20" : ""}`}>
+                                    {cell === "" ? "—" : cell}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+        <div className="mt-4 flex items-center gap-2 text-corporate-emerald text-[11px]">
+            <CheckCircle className="h-3.5 w-3.5 flex-shrink-0" />
+            <span>Template filters only accounts with outstanding balances</span>
+        </div>
+    </div>
                     </div>
                 </div>
             </section>
