@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Loader2, CheckCircle2, Phone, Mail, MapPin } from "lucide-react"
 
 const contactInfo = [
-    { icon: Phone, label: "Call Us", value: "+254 740 964 423" },
+    { icon: Phone, label: "Call Us", value: "+254 768 978 865" },
     { icon: Mail, label: "Email", value: "sacco@corbantechnologies.org" },
     { icon: MapPin, label: "Based in", value: "Mombasa, Kenya" },
 ]
