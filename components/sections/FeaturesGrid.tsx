@@ -37,7 +37,7 @@ const features = [
     {
         icon: Smartphone,
         title: "M-Pesa Integration",
-        desc: "Full Daraja API (Safaricom). STK Push for deposits, B2C disbursements for loans, real-time callback processing, and automatic GL posting on confirmation.",
+        desc: "Full Daraja API (Safaricom). STK Push for deposits, real-time callback processing, and automatic GL posting on confirmation.",
         accent: "bg-green-50 text-green-600",
         wide: false,
     },

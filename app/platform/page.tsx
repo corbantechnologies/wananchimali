@@ -119,7 +119,7 @@ const moduleFeatures = [
             "Admin loan appraisal and approval",
             "Diminishing Balance & Flat Rate engines",
             "Loan disbursement (bulk CSV or individual)",
-            "M-Pesa B2C disbursement to phone",
+            // "M-Pesa B2C disbursement to phone", // not built yet
             "Repayment schedule generation",
             "Loan penalty tracking",
             "Loan account statement per member",
@@ -133,7 +133,7 @@ const moduleFeatures = [
         features: [
             "Daraja API (Safaricom) full integration",
             "STK Push initiation for savings deposits",
-            "B2C disbursement for loan payout",
+            // "B2C disbursement for loan payout", // not built yet
             "Real-time callback processing",
             "Transaction reconciliation",
             "M-Pesa receipt number capture",
@@ -239,7 +239,7 @@ const stats = [
     { value: "3", label: "Loan Interest Engines", sub: "Diminishing, Flat Rate, Asset Finance" },
     { value: "10+", label: "Core Modules", sub: "From member CRM to full GL" },
     { value: "2", label: "Portals", sub: "Member self-service & Admin control" },
-    { value: "Real-time", label: "M-Pesa Integration", sub: "STK Push & B2C via Daraja API" },
+    { value: "Real-time", label: "M-Pesa Integration", sub: "STK Push via Daraja API" },
 ]
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
