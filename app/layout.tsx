@@ -104,7 +104,7 @@ export default function RootLayout({
                 "Member CRM and bulk onboarding",
                 "Multi-pot savings management",
                 "Loan management with Diminishing Balance and Flat Rate engines",
-                "M-Pesa STK Push and B2C disbursements via Daraja API",
+                "M-Pesa STK Push deposits via Daraja API",
                 "Full General Ledger double-entry accounting",
                 "Bulk CSV payment processing with smart templates",
                 "Executive reporting (Balance Sheet, P&L, Trial Balance)",
